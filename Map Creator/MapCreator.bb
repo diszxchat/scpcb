@@ -361,6 +361,18 @@ Function InitEvents()
 				rt\events[0]="096spawn"
 			Case "room3z2"
 				rt\events[0]="096spawn"
+			Case "room409"
+				rt\events[0]="room409"
+			Case "room2test1074"
+				rt\events[0]="room2test1074"
+			Case "room009"
+				rt\events[0]="room009"	
+			Case "room038"
+				rt\events[0]="room038"
+			Case "room020"
+				rt\events[0]="room020"	
+			Case "newroom005"
+				rt\events[0]="newroom106"																							
 		End Select
 	Next
 	
@@ -463,7 +475,7 @@ Repeat
 	x = 20
 	y = 50
 	width = 180
-	height = 768-70
+	height = 850-70
 	TextBox (x,y,width,height,"")
 	
 	Local RA# = Max(RoomTemplateAmount/67.0,1)
