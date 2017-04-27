@@ -3623,7 +3623,7 @@ Function UpdateEvents()
 								Curr106\PrevY = EntityY(Collider)
 							EndIf
 							
-							For i = 0 To 1
+							For i = 0 To 4
 								Local spawnPoint.WayPoints = Null
 								For x = i*((gridsz*gridsz)/5.0) To (gridsz*gridsz-1)
 									DebugLog("spawn 966 X: "+x)
@@ -4353,7 +4353,7 @@ Function UpdateEvents()
 				;[Block]
 				
 				If PlayerRoom=e\room Then
-					If e\Sound=0 Then e\Sound=LoadSound_Strict("SFX\music\420J.ogg") ;tell me if you can find a better alternative to this					
+					If e\Sound=0 Then e\Sound=LoadSound_Strict("SFX\music\Blue Feather.ogg") ;tell me if you can find a better alternative to this					
 					
 					GiveAchievement(Achv1074)
 					If (Wearing714=1) Or (WearingNightVision>0) Then
@@ -4368,7 +4368,7 @@ Function UpdateEvents()
 						If EntityInView(e\room\Objects[0],Camera) And EntityVisible(e\room\Objects[0],Camera) Then BlinkTimer = -2 : BlurTimer = 500
 						If e\SoundCHN <> 0 Then StopChannel e\SoundCHN : e\SoundCHN = 0
 						aa=GetSurfaceBrush(e\room\NonFreeAble[0])
-						BrushTexture aa, e\room\Textures[0], 0, 1
+						BrushTexture aa, e\room\Textures[0], 0, 2
 						PaintSurface e\room\NonFreeAble[0],aa
 						FreeBrush aa
 						HeartBeatVolume = 0.0
@@ -4377,7 +4377,7 @@ Function UpdateEvents()
 						e\EventState3 = 0.0
 						If EntityInView(e\room\Objects[0],Camera) And EntityVisible(e\room\Objects[0],Camera) Then BlinkTimer = -2 : BlurTimer = 500
 						aa=GetSurfaceBrush(e\room\NonFreeAble[0])
-						BrushTexture aa, e\room\Textures[1], 0, 1
+						BrushTexture aa, e\room\Textures[1], 0, 2
 						PaintSurface e\room\NonFreeAble[0],aa
 						FreeBrush aa
 					EndIf
@@ -4426,25 +4426,41 @@ Function UpdateEvents()
 						
 						Select Floor(e\EventState)
 							Case 250.0
-								Msg = "Hey there!"
+								Msg = "''This work of art is the greatest I've seen in my entire life.''"
 								MsgTimer = 70*5
 							Case 500.0
-								Msg = "If you're seeing this, post a bug report."
+								Msg = "''But why do I see myself in it?''"
 								MsgTimer = 70*5
 							Case 700.0
-								Msg = "Seriously, this SCP should not spawn." ; shouldn't --> should not why juan why --Mark
+								Msg = "''What is this supposed to mean?''" ; SCP-1074 Anti-Virus Software --Diszxchat
 								MsgTimer = 70*5
 							Case 800.0
 								BlinkTimer = -2
 								BlurTimer = 800
 							Case 1200.0
-								Msg = "This event sucks."
-								MsgTimer = 70*5
-							Case 1400.0
-								Msg = "Thanks a lot, Juan."
+								Msg = "''Now I understand.''"
 								MsgTimer = 70*5
 							Case 1500.0
-								DeathMSG = "God DAMMIT, Juan. What were you thinking?"
+								Msg = "''I killed them.''"
+								MsgTimer = 70*5
+							Case 1750.0
+								DeathMSG = "''This is my punishment, that is why I'm here.''"
+							Case 2000.0
+								Msg = "''Their lives are over, and it's all my fault.''"
+								MsgTimer = 70*5
+							Case 2050.0
+								BlinkTimer = -2
+								BlurTimer = 800
+							Case 2150.0
+								Msg = "''I'm sorry.''"
+								MsgTimer = 70*5
+							Case 2500.0
+								Msg = "You feel weak."
+								MsgTimer = 70*5
+								BlurTimer = 2500
+							Case 2600.0
+								DeathMSG = "Subject D-9341 was found catatonic in Test Room 4-A, where SCP-1074 was being studied before the containment breach occurred."
+								DeathMSG = DeathMSG+" Subject terminated after the breach ended."
 								Kill()
 						End Select
 						If e\EventState >= 2500.0 Then
@@ -4824,11 +4840,10 @@ Function UpdateEvents()
 					;eventstate3 = has the player opened the gas valves (0=no, 0<x<35*70 yes, x>35*70 the host has died)
 					
 					If e\EventState = 0 Then
-						If EntityDistance(Collider, e\room\Objects[3])<2 Then
+						If EntityDistance(Collider, e\room\Objects[3])<2 Then 
 							n.NPCs = CreateNPC(NPCtypeD, EntityX(e\room\Objects[4],True),0.5,EntityZ(e\room\Objects[4],True))
 							
 							n\texture = "GFX\NPCs\035victim.jpg"
-							n\Model = "GFX\NPCs\035.b3d"
 							HideEntity n\obj	
 							
 							SetAnimTime(n\obj, 501)
@@ -4848,13 +4863,12 @@ Function UpdateEvents()
 									temp = e\room\NPC[0]\Frame
 									
 									FreeEntity e\room\NPC[0]\obj
-									e\room\NPC[0]\obj = LoadAnimMesh_Strict("GFX\NPCs\035.b3d")
+									e\room\NPC[0]\obj = LoadAnimMesh_Strict("GFX\NPCs\035.b3d")									
 									x = 0.5 / MeshWidth(e\room\NPC[0]\obj)
-									e\room\NPC[0]\ModelScaleX = x
-									e\room\NPC[0]\ModelScaleY = x
-									e\room\NPC[0]\ModelScaleZ = x
 									ScaleEntity e\room\NPC[0]\obj, x,x,x
+									
 									SetAnimTime(e\room\NPC[0]\obj, temp)
+									
 									ShowEntity e\room\NPC[0]\obj
 									
 									RotateEntity n\Collider, 0, e\room\angle+270, 0, True
@@ -5479,7 +5493,7 @@ Function UpdateEvents()
 						PositionEntity pvt%,EntityX(e\room\NPC[1]\Collider),EntityY(e\room\NPC[1]\Collider)+0.2,EntityZ(e\room\NPC[1]\Collider)
 						
 						PointEntity Collider, e\room\NPC[1]\Collider
-						PointEntity Camera, pvt%,EntityRoll(Camera)
+						PointEntity Camera, pvt%
 						
 						FreeEntity pvt%
 						
@@ -5531,15 +5545,12 @@ Function UpdateEvents()
 								e\EventState = 3
 								e\EventState2 = 1
 								;e\Sound = LoadSound_Strict("SFX\SCP\079\Speech.ogg")
-								;LoadEventSound(e,"SFX\SCP\079\Speech.ogg")
-								;e\SoundCHN = PlaySound_Strict (e\Sound)
-								e\SoundCHN = StreamSound_Strict("SFX\SCP\079\Speech.ogg",SFXVolume,0)
-								e\SoundCHN_isStream = True
+								LoadEventSound(e,"SFX\SCP\079\Speech.ogg")
+								e\SoundCHN = PlaySound_Strict (e\Sound)
 							EndIf							
 						ElseIf e\EventState = 3
 							If e\EventState < 3500 Then 
-								;If ChannelPlaying(e\SoundCHN) Then
-								If IsStreamPlaying_Strict(e\SoundCHN)
+								If ChannelPlaying(e\SoundCHN) Then 
 									If Rand(3) = 1 Then
 										EntityTexture(e\room\Objects[1], OldAiPics(0))
 										ShowEntity (e\room\Objects[1])
@@ -5547,10 +5558,7 @@ Function UpdateEvents()
 										HideEntity (e\room\Objects[1])							
 									End If							
 								Else
-									;If e\Sound <> 0 Then FreeSound_Strict e\Sound : e\Sound = 0
-									If e\SoundCHN<>0
-										StopStream_Strict(e\SoundCHN) : e\SoundCHN=0
-									EndIf
+									If e\Sound <> 0 Then FreeSound_Strict e\Sound : e\Sound = 0
 									EntityTexture(e\room\Objects[1], OldAiPics(1))
 									ShowEntity (e\room\Objects[1])
 								EndIf
@@ -5558,12 +5566,8 @@ Function UpdateEvents()
 								If EntityDistance(e\room\Objects[0], Collider)<2.5 Then 
 									e\EventState = 10001
 									;e\Sound = LoadSound_Strict("SFX\SCP\079\Refuse.ogg")
-									;LoadEventSound(e,"SFX\SCP\079\Refuse.ogg")
-									;e\SoundCHN = PlaySound_Strict (e\Sound)
-									If e\SoundCHN<>0
-										StopStream_Strict(e\SoundCHN) : e\SoundCHN=0
-									EndIf
-									e\SoundCHN = StreamSound_Strict("SFX\SCP\079\Refuse.ogg",SFXVolume,0)
+									LoadEventSound(e,"SFX\SCP\079\Refuse.ogg")
+									e\SoundCHN = PlaySound_Strict (e\Sound)
 									EntityTexture(e\room\Objects[1], OldAiPics(1))
 									ShowEntity (e\room\Objects[1])								
 								EndIf
@@ -5578,12 +5582,8 @@ Function UpdateEvents()
 				
 				If e\EventState2 = 1 Then
 					If RemoteDoorOn Then 	
-						;LoadEventSound(e,"SFX\SCP\079\GateB.ogg")
-						;e\SoundCHN = PlaySound_Strict (e\Sound)
-						If e\SoundCHN<>0
-							StopStream_Strict(e\SoundCHN) : e\SoundCHN=0
-						EndIf
-						e\SoundCHN = StreamSound_Strict("SFX\SCP\079\GateB.ogg",SFXVolume,0)
+						LoadEventSound(e,"SFX\SCP\079\GateB.ogg")
+						e\SoundCHN = PlaySound_Strict (e\Sound)						
 						e\EventState2 = 2
 						
 						For e2.Events = Each Events
@@ -8076,6 +8076,421 @@ Function UpdateEvents()
 					EndIf
 				EndIf
 				;[End Block]
+			Case "room409"
+				;[Block]
+				If PlayerRoom = e\room Then
+					If EntityY(Collider) < -2848*RoomScale Then
+						GiveAchievement(Achv409);=True
+						If Music(24)=0 Then Music(24) = LoadSound_Strict("SFX\Music\SCP-409 Ambience.ogg") 
+						ShouldPlay = 24
+					EndIf
+					;If EntityY(Collider,True)<-4.0 Then
+					;	If Music(7)=0 Then Music(7) = LoadSound("SFX\Music\Groaning Ambience.ogg") 
+					;	ShouldPlay = 7
+					;EndIf	
+					If e\EventState = 0 Then
+						de.Decals = CreateDecal(19, EntityX(e\room\Objects[9],True),EntityY(e\room\Objects[9],True)+0.01,EntityZ(e\room\Objects[9],True), 90, Rand(360), 0)
+						de\Size = 0.05 : de\SizeChange = 0.001 : EntityAlpha(de\obj, 0.8) : UpdateDecals() 
+						e\EventState=1
+					EndIf
+					dist# = EntityDistance(Collider, e\room\Objects[1])
+					If dist <1.0 And crystalization < 1 Then
+						crystalization = 1
+					EndIf
+					e\EventState2 = UpdateElevators(e\EventState2, e\room\RoomDoors[0], e\room\RoomDoors[1],e\room\Objects[2],e\room\Objects[3], e)
+				EndIf
+				;[End Block]
+			Case "room009"
+				;[Block]
+				If (e\room\Objects[0]=0) And (e\Sound=0) Then
+					For i = 0 To 19
+						e\room\Objects[3]=0
+						If e\room\LightSprites[i] <> 0 Then
+							DebugLog EntityY(e\room\LightSprites[i],True)
+							If EntityY(e\room\LightSprites[i],True)>3.5 Then
+								e\room\Objects[0]=e\room\LightSprites[i]
+								Exit
+							EndIf
+						Else
+							e\room\Objects[0]=0
+							Exit
+						EndIf
+					Next
+				EndIf
+				
+				If e\Sound=0 Then LoadEventSound(e,"SFX\light_blink.ogg")
+				
+				If PlayerRoom=e\room Then
+					If e\room\Objects[0]<>0 Then
+						e\SoundCHN = LoopSound2(AlarmSFX(0), e\SoundCHN, Camera, e\room\Objects[0], 8.0,2.0)
+					EndIf
+					GiveAchievement(Achv009);=True
+					TempLightVolume=2.0
+					If e\EventState3=0.0 Then
+						If ((EntityY(Collider)<=-1.4) And (WearingHazmat=False)) Then
+							e\EventState=e\EventState+FPSfactor
+						Else
+							e\EventState=Max(e\EventState-(FPSfactor*0.5),0.0)
+						EndIf
+					EndIf
+					If e\EventState>=300.0 And e\EventState3=0.0 Then
+						e\EventState3=1.0
+						PlaySound_Strict LoadTempSound("SFX\SCP\294\burn.ogg")
+						PlaySound TempSound
+						If Rand(2)=1 Then
+							Msg = "You feel a burning pain in your right leg"
+						Else
+							Msg = "You feel a burning pain in your left leg"
+						EndIf
+						MsgTimer = 70*5
+						CameraShake=5.0
+					EndIf
+					
+					If e\EventState2>3.0 Then
+						e\EventState2=Max(e\EventState2-FPSfactor,3.0)
+					Else
+						e\EventState2=e\EventState2-FPSfactor
+					EndIf
+					
+					If (e\EventState2=3.0) Then
+						;If BumpEnabled Then
+						;	RelightRoom e\room,e\room\Objects[0],e\room\Objects[1]
+						;Else
+						RelightRoom e\room,e\room\Textures[0],e\room\Textures[1]
+						;EndIf
+						If e\room\Objects[0]<>0 Then
+							HideEntity e\room\Objects[0]
+							PlaySound2(e\Sound, Camera, e\room\Objects[0], 6.0,2.0)
+						EndIf
+					Else If (e\EventState2=<0.0) Then
+						;If BumpEnabled Then
+						;	RelightRoom e\room,e\room\Objects[1],e\room\Objects[0]
+						;Else
+						RelightRoom e\room,e\room\Textures[1],e\room\Textures[0]
+						;EndIf
+						If e\room\Objects[0]<>0 Then ShowEntity e\room\Objects[0]
+						e\EventState2=Float(Rand(10,30)+1)
+					EndIf
+				EndIf
+				If e\EventState>=300.0 Then
+					e\EventState=e\EventState+FPSfactor
+					Injuries=Max(Injuries,((e\EventState-300.0)/1000.0))
+					If e\EventState<4300.0 Then
+						HeartBeatVolume=Min(1.0,((e\EventState-300.0)/4000.0))
+					Else
+						HeartBeatVolume=0.0
+						BlinkTimer=3.0
+					EndIf
+				EndIf
+				If e\EventState>=4290.0 And e\EventState3=1.0 Then
+			        PlaySound_Strict LoadTempSound("SFX\ice-cracking.ogg")
+					PlaySound TempSound
+					e\EventState3=2.0
+				EndIf
+				If e\EventState>=4300.0 And e\EventState3>=2.0 Then
+					Playable=False
+					CanBreathe=False
+					ShowEntity(IceOverlay)
+					EntityAlpha IceOverlay,Min(0.1,(e\EventState-4300.0)/400.0)
+					BlurTimer=4.0
+					If e\EventState>=4350.0 Then BlinkTimer=Max(-10.0,(4350.0-e\EventState)/20.0)
+				Else
+					HideEntity IceOverlay
+				EndIf
+				
+				If e\EventState>=4502.0 And e\EventState3=2.0 Then
+					If e\room=PlayerRoom Then
+						DeathMSG = "A crystallized D-class subject was found by the maintenance team dispatched to repair "
+						DeathMSG = DeathMSG+" SCP-009's containment chamber. The body is currently unidentifiable"
+						DeathMSG = DeathMSG+" due to massive damage caused by the substance."
+					Else If EntityDistance(Collider,e\room\obj)<128.0 Then
+						DeathMSG = "A crystallized D-class subject was found near SCP-009's containment chamber."
+						DeathMSG = DeathMSG+" The body is currently unidentifiable due to massive damage caused by the substance."
+					Else
+						DeathMSG = "A crystallized D-class subject was found. Death caused by"
+						DeathMSG = DeathMSG+" exposure to SCP-009. How the subject reached [REDACTED]"
+						DeathMSG = DeathMSG+" before total contamination is unknown."
+					EndIf
+					Kill()
+					e\EventState3=3.0
+				EndIf
+				
+				;[End Block]
+			Case "room038"
+				;[Block]
+				If RemoteDoorOn Then 
+					If e\room\RoomDoors[0]\openstate > 100 And e\room\RoomDoors[0]\open And e\room = PlayerRoom Then 
+						;close the door if the remote door control system is on
+						e\room\RoomDoors[0]\open = False
+						PlaySound_Strict HorrorSFX(7)
+						e\room\RoomDoors[0]\locked = True
+					EndIf
+				Else
+					e\room\RoomDoors[0]\locked = False					
+				If PlayerRoom = e\room Then	GiveAchievement(Achv038)
+				EndIf
+				
+				UpdateButton(e\room\objects[0])
+				If ClosestButton = e\room\objects[0] And MouseHit1 Then
+					Msg = "This button doesn't seem to do anything."
+					PlaySound2(ButtonSFX, Camera, e\room\objects[0])
+					MsgTimer = 5*70
+					MouseHit1=0
+				EndIf
+				Local itsize% = 0
+				Local nearTree% = 0
+			    Local newName$, newTempName$ ;, itemName$				
+				Local tempDir#
+				
+				If Abs(point_distance(EntityX(Collider,True),EntityZ(Collider,True),EntityX(e\room\objects[1],True),EntityZ(e\room\Objects[1],True))) < 0.6 Then
+					;start cloning the player
+					If e\EventState3<=0 Then
+						If (Not WearingHazmat) Then
+							e\EventState3 = 4000.0
+							Msg = "You touched the tree's bark"
+							MsgTimer = 7*70
+						Else
+							If e\EventState3 = 0 Then
+								Msg = "You touched the tree's bark with the hazmat suit on"
+								MsgTimer = 7*70
+								e\EventState3 = -3000.0
+							EndIf
+						EndIf
+					EndIf
+				EndIf
+				If PlayerRoom = e\room Then
+					
+					TempLightVolume=1.8
+					
+					If e\EventState3>2 Then e\EventState3=Max(e\EventState3-FPSfactor,2) ;touched with bare hands
+					If e\EventState3<-2 Then e\EventState3=Min(e\EventState3+FPSfactor,-2) ;touched with the hazmat suit on
+					If e\EventState3=2 Then
+						;finally clone the player, and kill the clone
+						tempDir# = point_direction(EntityX(PlayerRoom\Objects[1],True),EntityZ(PlayerRoom\Objects[1],True),EntityX(Collider,True),EntityZ(Collider,True))
+						If e\room\NPC[0] = Null Then
+							e\room\NPC[0] = CreateNPC(NPCTypeD,EntityX(PlayerRoom\Objects[1],True) + (Cos(tempDir) * 250) * RoomScale,PlayerRoom\y + 2,EntityZ(PlayerRoom\Objects[1],True) + (Sin(tempDir) * 250) * RoomScale)
+							SetAnimTime e\room\NPC[0]\obj, 28.0
+							e\room\NPC[0]\State = 8
+							e\room\NPC[0]\texture = "GFX\npcs\classd4.jpg"
+							Local loadTex=LoadTexture("GFX\npcs\classd4.jpg")
+							EntityTexture e\room\NPC[0]\obj,loadTex
+							FreeTexture loadTex
+							;FreeTexture loadTex
+							RotateEntity e\room\NPC[0]\Collider,0,tempDir+90,0
+						EndIf
+						If (EntityY(e\room\NPC[0]\Collider)>0.6 Or e\room\NPC[0]\DropSpeed = 0.0) And EntityY(e\room\NPC[0]\Collider)>0.35 Then
+							TranslateEntity e\room\NPC[0]\Collider,0,-0.1,0
+							ResetEntity e\room\NPC[0]\Collider
+						ElseIf EntityY(e\room\NPC[0]\Collider)>0.35
+							e\room\NPC[0]\DropSpeed = Min(e\room\NPC[0]\DropSpeed,-0.1)
+						EndIf
+						If EntityY(e\room\NPC[0]\Collider)>0.35 Then
+							Animate2(e\room\NPC[0]\obj, AnimTime(e\room\NPC[0]\obj), 1, 10, 0.12, False)
+						Else
+							Animate2(e\room\NPC[0]\obj, AnimTime(e\room\NPC[0]\obj), 11, 19, 0.25, False)
+							If e\Sound=0 Then 
+								LoadEventSound(e,"SFX\General\bodyfall.ogg")
+								;e\Sound = LoadSound("SFX\bodyfall.ogg")
+							    PlaySound_Strict e\Sound
+								
+								de.Decals = CreateDecal(3, EntityX(e\room\NPC[0]\Collider), 0.001, EntityZ(e\room\NPC[0]\Collider), 90, Rand(360), 0)
+								de\Size = 0.01 : EntityAlpha(de\obj, 0.8) : UpdateDecals()			
+							EndIf
+							If AnimTime(e\room\NPC[0]\obj) = 19.0 Then
+								FreeSound_Strict e\Sound
+								e\Sound = 0
+								e\room\NPC[0] = Null
+								e\EventState3 = 0
+							EndIf
+						EndIf
+					EndIf					
+					
+					If e\EventState3=-2 Then
+						;clone a hazmat suit, since you didn't touch the tree directly
+						tempDir# = Rnd(360)
+					    cloneOn.Items = CreateItem("Hazmat Suit","hazmatsuit",EntityX(PlayerRoom\Objects[1],True) + (Cos(tempDir) * 200) * RoomScale,PlayerRoom\y + 2,EntityZ(PlayerRoom\Objects[1],True) + (Sin(tempDir) * 200) * RoomScale)
+						EntityType(cloneOn\collider, HIT_ITEM)
+						cloneOn\WontColl = True
+						e\EventState3 = 0
+					EndIf
+				EndIf
+				
+				For itemz.Items = Each Items
+					If Lower(PlayerRoom\RoomTemplate\Name) = "room038" And EntityDistance(itemz\collider,Collider) < 1500.0 * RoomScale Then
+						If Abs(point_distance(EntityX(itemz\collider,True),EntityZ(itemz\collider,True),EntityX(PlayerRoom\objects[1],True),EntityZ(PlayerRoom\Objects[1],True))) < 0.5 And (Not itemz\Picked) Then
+							nearTree=1
+							If e\EventState2=0 Then
+								Select itemz\itemtemplate\tempname
+									Case "hazmatsuit","hazmatsuit2"
+										itsize% = 3000
+									Case "vest","finevest","veryfinevest"
+										itsize% = 1000
+									Default
+										itsize% = 500
+								End Select
+								e\EventState=itsize
+							EndIf
+							e\EventState2=1
+							If e\EventState>0 Then
+								e\EventState=Max(e\EventState-FPSfactor,0)
+							Else
+								tempDir# = Rnd(360)
+								Local cloneIt.Items
+								Local itr%,itg%,itb%,ita%
+								itemName = ""
+								itr = itemz\r
+								itg = itemz\g
+								itb = itemz\b
+								ita = itemz\a
+								
+								Local invSlots%,isAnim%,anim#,invimg%
+								
+								invSlots=itemz\invSlots
+								;If isInv<>0.0 Then
+								;	isInv=itemz\state2
+								;EndIf
+								isAnim=False
+								If itemz\itemtemplate\isAnim=True Then
+									isAnim=True
+									anim=AnimTime(itemz\collider)
+								Else
+									isAnim=False
+									anim=AnimTime(itemz\collider)									
+								EndIf
+								invimg=itemz\invimg
+								
+								newName=itemz\itemtemplate\name
+								newTempName=itemz\itemtemplate\tempname
+								
+								Select itemz\itemtemplate\tempname								
+									Case "scp500"
+										newName="Pill"
+										newTempName="pill"
+									Case "scp714"
+										newName="Green Jade Ring"
+										newTempName="ring"
+									Case "scp1025"
+										newName="The Encyclopedia of Common Diseases"
+										newTempName="book"
+									Case "scp513"
+										newName="Cowbell"
+										newTempName="cowbell"
+									Case "cup"
+										itemName = itemz\name
+									Case "clipboard"
+										anim=17.0
+										invimg=itemz\itemtemplate\invimg2
+									Case "scp005"
+										newName="Key"
+										newTempName="misc"
+									Case "scp178"																		
+										newName="3-D Glasses"
+										newTempName="glasses"									
+									Case "scp1499"
+										newName="Gasmask"
+										newTempName="mask"																
+								End Select
+								cloneIt = CreateItem(newName,newTempName,EntityX(PlayerRoom\Objects[1],True) + (Cos(tempDir) * 200) * RoomScale,PlayerRoom\y + 2,EntityZ(PlayerRoom\Objects[1],True) + (Sin(tempDir) * 200) * RoomScale,itr,itg,itb,ita,invSlots)
+								If isAnim Then SetAnimTime cloneIt\model,0.0,anim;cloneIt\updateAnim=anim
+								cloneIt\invimg=invimg															
+								If (itemName<>"") Then cloneIt\name = itemName
+								EntityType(cloneIt\collider, HIT_ITEM)
+								If (newName = "S-NAV Navigator Ultimate") Then
+									cloneIt\state = 101
+								EndIf
+								;If (newName = "SCP-178") Then
+								;	SetAnimTime cloneIt\model,19.0
+								;EndIf								
+								cloneIt\WontColl = True
+								Select itemz\itemtemplate\tempname
+									Case "hazmatsuit","hazmatsuit2"
+										itsize% = 3600
+									Case "vest","finevest","veryfinevest"
+										itsize% = 1200
+									Default
+										itsize% = 600
+								End Select
+								e\EventState=Max(itsize,e\EventState)
+							EndIf
+						EndIf
+						If EntityY(itemz\collider,True) < 0.8 Then itemz\WontColl = False
+						
+					Else
+						itemz\WontColl = False
+					EndIf
+				Next
+				If nearTree = 0 Then e\EventState2 = 0
+				;[End Block]
+			Case "room020"
+				;[Block]
+				If PlayerRoom = e\room Then
+					If e\room\Objects[8]=0 Then
+						If e\EventState=0 Then
+							PositionEntity Curr173\Collider, EntityX(e\room\Objects[1],True),EntityY(e\room\Objects[1],True),EntityZ(e\room\Objects[1],True)
+							ResetEntity Curr173\Collider
+							e\EventState=1
+						EndIf
+						de.Decals = CreateDecal(21, EntityX(e\room\Objects[0],True),EntityY(e\room\Objects[0],True),EntityZ(e\room\Objects[0],True), 90, Rand(360), 0)
+						e\room\Objects[8] = de\obj
+						de\Size = 0.010 : de\SizeChange = 1 : EntityAlpha(de\obj, 0.9) : UpdateDecals()
+						HideEntity e\room\Objects[8]
+					EndIf
+					If WearingNightVision > 0 Then
+						ShowEntity e\room\Objects[8]
+						If EntityInView(e\room\Objects[8],Camera) Then GiveAchievement(Achv020)
+					Else
+						HideEntity e\room\Objects[8]
+					EndIf
+				EndIf	
+				;[End Block]
+			Case "newroom106"
+				;[Block]
+			If diceroll = 1 Then				
+				If e\EventState = 0 Then
+					If e\room\dist < 5.0 And e\room\dist > 0 Then
+						If Curr106\State >= 0 Then e\EventState = 1	
+					ElseIf Contained106
+						RemoveEvent(e)
+					EndIf		
+				ElseIf e\EventState = 1
+				
+					If e\room\dist < 3.0 Then
+						e\EventState = 2
+						d.Decals = CreateDecal(0, EntityX(e\room\obj), 445.0*RoomScale, EntityZ(e\room\obj), -90, Rand(360), 0)
+						d\Size = Rnd(0.5, 0.7) : EntityAlpha(d\obj, 0.7) : d\ID = 1 : ScaleSprite(d\obj, d\Size, d\Size)
+						EntityAlpha(d\obj, Rnd(0.7, 0.85))
+						
+						PlaySound_Strict HorrorSFX(10)
+					ElseIf e\room\dist > 8.0
+						If Rand(5) = 1 Then
+							Curr106\Idle = False
+							RemoveEvent(e)
+						Else
+							Curr106\Idle = False
+							Curr106\State = -10000
+							RemoveEvent(e)
+						End If
+					EndIf
+				Else
+					e\EventState = e\EventState+FPSfactor
+					
+					PositionEntity(Curr106\Collider, EntityX(e\room\obj, True) - Sin(MilliSecs2() / 150.0) / 4.0, EntityY(Collider) + 1.0 - Min(Sin(e\EventState)*1.5,1.1), EntityZ(e\room\obj, True) - Sin(MilliSecs2() / 190.0) / 4.0)
+					
+					;TranslateEntity(Curr106\Collider, 0, -Max((3.0-dist),0), 0, True)
+					PointEntity(Curr106\Collider, Camera)
+					Curr106\State = -11
+					AnimateNPC(Curr106, 55, 104, 0.1)
+					Curr106\Idle = True
+					
+					If e\EventState > 180 Then
+						Curr106\Idle = False
+						PositionEntity(Curr106\Collider, EntityX(Curr106\Collider), -3.0, EntityZ(Curr106\Collider), True)
+						
+						RemoveEvent(e)
+					EndIf
+					EndIf
+				EndIf																	
+				;[End Block]																												
 		End Select
 		
 		If e<>Null Then

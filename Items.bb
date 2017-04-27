@@ -272,20 +272,45 @@ Function InitItemTemplates()
 	;BoH items
 	
 	it = CreateItemTemplate("Clipboard", "clipboard", "GFX\items\clipboard.b3d", "GFX\items\INVclipboard.jpg", "", 0.003, "", "GFX\items\INVclipboard2.jpg", 1)
-	
+	it = CreateItemTemplate("SCP-005", "scp005", "GFX\items\untitled2.b3d", "GFX\items\INV005.jpg", "", 0.0004,"GFX\items\keyB_tx.jpg")	
 	it = CreateItemTemplate("SCP-1123", "1123", "GFX\items\HGIB_Skull1.b3d", "GFX\items\inv1123.jpg", "", 0.015) : it\sound = 2
 	it = CreateItemTemplate("SCP-178", "scp178", "GFX\items\scp178.b3d", "GFX\items\INV178.jpg", "", 0.02,"","",1)
+
+    ;Clipboard SCP-038 Version testing
+
+	;it = CreateItemTemplate("Clipboard", "clipboard038", "GFX\items\clipboard.b3d", "GFX\items\INVclipboard.jpg", "", 0.003, "", "GFX\items\INVclipboard2.jpg", 1)	
 	
-	;it = CreateItemTemplate("Document SCP-1074", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc1074.jpg", 0.003) : it\sound = 0
-	;it = CreateItemTemplate("SCP-1074 Containment Notice", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc_arce.jpg", 0.003) : it\sound = 0
+	it = CreateItemTemplate("Document SCP-1074", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc1074.jpg", 0.003) : it\sound = 0
+	it = CreateItemTemplate("Document Unknown", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc1074_Joke.jpg", 0.003) : it\sound = 0	
+	it = CreateItemTemplate("SCP-1074 Containment Notice", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc_arce.jpg", 0.003) : it\sound = 0
+	it = CreateItemTemplate("Document SCP-038", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc038.jpg", 0.003) : it\sound = 0		
 	
 	it = CreateItemTemplate("Night Vision Goggles", "supernv", "GFX\items\NVG.b3d", "GFX\items\INVsupernightvision.jpg", "", 0.02) : it\sound = 2
 	it = CreateItemTemplate("Night Vision Goggles", "nvgoggles", "GFX\items\NVG.b3d", "GFX\items\INVnightvision.jpg", "", 0.02) : it\sound = 2
 	it = CreateItemTemplate("Night Vision Goggles", "veryfinenvgoggles", "GFX\items\NVG.b3d", "GFX\items\INVveryfinenightvision.jpg", "", 0.02) : it\sound = 2
-	
+
+	it = CreateItemTemplate("Note from Maynard", "paper", "GFX\items\paper.x", "GFX\items\INVnote.jpg", "GFX\items\maynard005note.png", 0.0025) : it\sound = 0
+	it = CreateItemTemplate("Document SCP-409", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc409.jpg", 0.003) : it\sound = 0	
+	it = CreateItemTemplate("Document SCP-005", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc005.jpg", 0.003) : it\sound = 0	
+	it = CreateItemTemplate("Document SCP-009", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc009.jpg", 0.003) : it\sound = 0	
+				
+	it = CreateItemTemplate("Binoculars", "binocular", "GFX\items\binoculars.b3d", "GFX\items\INVbinoculars.jpg", "", 0.03) : it\sound = 2	
 	it = CreateItemTemplate("Syringe", "syringe", "GFX\items\Syringe\syringe.b3d", "GFX\items\Syringe\inv.png", "", 0.005) : it\sound = 2
 	it = CreateItemTemplate("Syringe", "finesyringe", "GFX\items\Syringe\syringe.b3d", "GFX\items\Syringe\inv.png", "", 0.005) : it\sound = 2
 	it = CreateItemTemplate("Syringe", "veryfinesyringe", "GFX\items\Syringe\syringe.b3d", "GFX\items\Syringe\inv.png", "", 0.005) : it\sound = 2
+
+	;stuff that scp-038 fails to duplicate correctly
+	it = CreateItemTemplate("Pill", "pill", "GFX\items\pill.b3d","GFX\items\INVpill.jpg","",0.0010)
+	it = CreateItemTemplate("Green Jade Ring", "ring", "GFX\items\scp714.b3d", "GFX\items\INV714.jpg", "", 0.3) : it\sound = 2
+	it = CreateItemTemplate("The Encyclopedia of Common Diseases", "book", "GFX\items\scp1025.b3d", "GFX\items\INV1025.jpg", "", 0.1) : it\sound = 0
+	it = CreateItemTemplate("Cowbell", "cowbell", "GFX\items\513.x", "GFX\items\INV513.jpg", "", 0.1) : it\sound = 2
+	it = CreateItemTemplate("Key","misc","GFX\items\untitled2.b3d", "GFX\items\INV005.jpg", "", 0.0004,"GFX\items\keyB_tx.jpg")
+	it = CreateItemTemplate("3-D Glasses", "glasses", "GFX\items\scp178.b3d", "GFX\items\INV178.jpg", "", 0.024,"","","",1)
+	it = CreateItemTemplate("Gasmask","mask","GFX\items\SCP-1499.3ds","GFX\items\INVscp1499.jpg", "", 0.023,"GFX\items\SCP-1499.jpg") : it\sound = 2
+
+	;Fan Breach Mod
+	it = CreateItemTemplate("SCP-001 Report", "paper", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "GFX\items\doc001.jpg", 0.003) : it\sound = 0
+	it = CreateItemTemplate("SCP-001", "scp001", "GFX\items\paper.x", "GFX\items\INVpaper.jpg", "", 0.003) : it\sound = 0
 	
 	;.........
 	
@@ -559,6 +584,8 @@ Function PickItem(item.Items)
 				Select item\itemtemplate\tempname
 					Case "scp178"
 						SetAnimTime item\model,19.0
+					Case "glasses"
+						SetAnimTime item\model,19.0						
 					Case "1123"
 						If Not (Wearing714 = 1) Then
 							If PlayerRoom\RoomTemplate\Name <> "room1123" Then
@@ -599,6 +626,8 @@ Function PickItem(item.Items)
 						GiveAchievement(Achv513)
 					Case "scp860"
 						GiveAchievement(Achv860)
+				    Case "scp005"
+				   	    GiveAchievement(Achv005)						
 					Case "key6"
 						GiveAchievement(AchvOmni)
 					Case "veryfinevest"

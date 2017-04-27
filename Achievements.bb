@@ -1,6 +1,6 @@
 ;achievement menu & messages by InnocentSam
 
-Const MAXACHIEVEMENTS=37
+Const MAXACHIEVEMENTS=43
 Dim Achievements%(MAXACHIEVEMENTS)
 
 Const Achv008%=0, Achv012%=1, Achv035%=2, Achv049%=3, Achv055=4,  Achv079%=5, Achv096%=6, Achv106%=7, Achv148%=8, Achv178=9, Achv205=10
@@ -12,6 +12,11 @@ Const AchvMaynard%=27, AchvHarp%=28, AchvSNAV%=29, AchvOmni%=30, AchvConsole%=31
 Const Achv1162% = 34, Achv1499% = 35
 
 Const AchvKeter% = 36
+
+;More SCPS Mod goes here
+
+Const Achv005% = 37, Achv409% = 38, Achv1074% = 39, Achv009% = 40, Achv038% = 41, Achv020% = 42
+
 
 Global UsedConsole
 
